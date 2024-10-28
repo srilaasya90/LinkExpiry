@@ -1,0 +1,43 @@
+﻿@page
+@model AdminPageModel
+@{
+    ViewData["Title"] = "Admin Link Generator";
+}
+
+<h2>Admin Link Generator</h2>
+
+<form method="post">
+    <label>Enter Username:</label>
+    <input type="text" asp-for="Username" />
+    <span asp-validation-for="Username"></span>
+    <br />
+
+    <label>Expiration (minutes, optional):</label>
+    <input type="number" asp-for="ExpirationMinutes" />
+    <br />
+
+
+    <label>Max Clicks (default 1):</label>
+    <input type="number" asp-for="MaxClicks" />
+    <br />
+
+    <button type="submit">Generate Link</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.GeneratedLink))
+
+{
+    <div>
+        <h3>Generated Link:</h3>
+        <!-- Make the generated link clickable -->
+        <a href="@Model.GeneratedLink" target="_blank">@Model.GeneratedLink</a>
+    </div>
+}
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+
+{
+    <div style="color:red;">
+        <h3>Error:</h3>
+        <p>@Model.ErrorMessage</p>
+    </div>
+}
